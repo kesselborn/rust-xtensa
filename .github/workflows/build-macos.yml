@@ -90,7 +90,7 @@ jobs:
 
       - name: Update all submodules (just in case we have new submodules)
         run: git submodule update --init
---init 
+
       - name: Install dependencies
         run: |
           brew install ninja
