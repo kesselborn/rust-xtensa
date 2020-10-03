@@ -41,6 +41,57 @@ jobs:
       - name: Reset git repo in case cache overwrote files
         run: git reset --hard
 
+      - name: Update submodule ./src/tools/rust-installer
+        run: git submodule update ./src/tools/rust-installer
+
+      - name: Update submodule ./src/doc/nomicon
+        run: git submodule update ./src/doc/nomicon
+
+      - name: Update submodule ./src/tools/cargo
+        run: git submodule update ./src/tools/cargo
+
+      - name: Update submodule ./src/doc/reference
+        run: git submodule update ./src/doc/reference
+
+      - name: Update submodule ./src/doc/book
+        run: git submodule update ./src/doc/book
+
+      - name: Update submodule ./src/tools/rls
+        run: git submodule update ./src/tools/rls
+
+      - name: Update submodule ./src/tools/rustfmt
+        run: git submodule update ./src/tools/rustfmt
+
+      - name: Update submodule ./src/tools/miri
+        run: git submodule update ./src/tools/miri
+
+      - name: Update submodule ./src/doc/rust-by-example
+        run: git submodule update ./src/doc/rust-by-example
+
+      - name: Update submodule ./library/stdarch
+        run: git submodule update ./library/stdarch
+
+      - name: Update submodule ./src/doc/rustc-dev-guide
+        run: git submodule update ./src/doc/rustc-dev-guide
+
+      - name: Update submodule ./src/doc/edition-guide
+        run: git submodule update ./src/doc/edition-guide
+
+      - name: Update submodule ./src/llvm-project
+        run: git submodule update ./src/llvm-project
+
+      - name: Update submodule ./src/doc/embedded-book
+        run: git submodule update ./src/doc/embedded-book
+
+      - name: Update submodule ./src/tools/rust-analyzer
+        run: git submodule update ./src/tools/rust-analyzer
+
+      - name: Update submodule ./library/backtrace
+        run: git submodule update ./library/backtrace
+
+      - name: Update all submodules (just in case we have new submodules)
+        run: git submodule update
+
       - name: Install dependencies
         run: |
           brew install ninja
