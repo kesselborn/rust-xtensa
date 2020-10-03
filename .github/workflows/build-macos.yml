@@ -9,15 +9,44 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-submodules
+        with:
+          path:
+            - ./src/tools/rust-installer
+            - ./src/doc/nomicon
+            - ./src/tools/cargo
+            - ./src/doc/reference
+            - ./src/doc/book
+            - ./src/tools/rls
+            - ./src/tools/rustfmt
+            - ./src/tools/miri
+            - ./src/doc/rust-by-example
+            - ./library/stdarch
+            - ./src/doc/rustc-dev-guide
+            - ./src/doc/edition-guide
+            - ./src/llvm-project
+            - ./src/doc/embedded-book
+            - ./src/tools/rust-analyzer
+            - ./library/backtrace
+            - ./build
+
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
+
+      - name: Reset git repo in case cache overwrote files
+        run: git reset --hard
 
       - name: Install dependencies
         run: |
           brew install ninja
 
+      - name: Configure Build
+        run: ./configure --experimental-targets=Xtensa
+
       - name: Build Rust Compiler
-        run: |
-          ./configure --experimental-targets=Xtensa
-          ./x.py build --stage 2
+        run: ./x.py build --stage 2
