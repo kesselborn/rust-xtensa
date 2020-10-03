@@ -35,8 +35,7 @@ jobs:
             ./src/tools/rust-analyzer
             ./library/backtrace
             ./build
-
-        key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Reset git repo in case cache overwrote files
         run: git reset --hard
