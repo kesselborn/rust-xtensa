@@ -47,7 +47,10 @@ jobs:
         run: ls -lah src/tools/rust-installer
 
       - name: Update submodule ./src/tools/rust-installer
-        run: git submodule update --force --init ./src/tools/rust-installer
+        run: |
+          git submodule status src/tools/rust-installer || true
+          git submodule sync src/tools/rust-installer || true
+          git submodule update --init src/tools/rust-installer || true
 
       - name: debug2
         run: ls -lah src/tools/rust-installer
