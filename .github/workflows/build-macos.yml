@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache node modules
+      - name: Cache submodules
         uses: actions/cache@v2
         env:
           cache-name: cache-submodules
@@ -43,8 +43,14 @@ jobs:
       - name: Reset git repo in case cache overwrote files
         run: git reset --hard
 
+      - name: debug
+        run: ls -lah src/tools/rust-installer
+
       - name: Update submodule ./src/tools/rust-installer
-        run: git submodule update --init ./src/tools/rust-installer
+        run: git submodule update --force --init ./src/tools/rust-installer
+
+      - name: debug2
+        run: ls -lah src/tools/rust-installer
 
       - name: Update submodule ./src/doc/nomicon
         run: git submodule update --init ./src/doc/nomicon
