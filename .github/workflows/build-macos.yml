@@ -9,6 +9,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Install dependencies
+        run: brew install ninja xz
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -91,12 +94,16 @@ jobs:
       - name: Update all submodules (just in case we have new submodules)
         run: git submodule update --init
 
-      - name: Install dependencies
-        run: |
-          brew install ninja
-
       - name: Configure Build
         run: ./configure --experimental-targets=Xtensa
 
       - name: Build Rust Compiler
         run: ./x.py build --stage 2
+
+      - name: Package files
+        run: tar -c --lzma -v -f dist.tar.lzma --exclude .git src/ build/x86_64-apple-darwin
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist.tar.lzma
