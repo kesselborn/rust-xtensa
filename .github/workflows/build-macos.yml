@@ -18,10 +18,10 @@ jobs:
       - name: Cache submodules
         uses: actions/cache@v2
         env:
-          cache-name: cache-submodules-2
+          cache-name: cache-submodules-3
         with:
           path: |
-            ./git/modules
+            ./.git/modules
             ./src/tools/rust-installer
             ./src/doc/nomicon
             ./src/tools/cargo
